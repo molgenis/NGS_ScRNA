@@ -1,0 +1,89 @@
+##### BACKEND #####
+stage,module load
+checkStage,module list
+jobname,jobname
+
+##### Tools and versions #####
+jdkVersion,Java/1.7.0_80
+NGSUtilsVersion,ngs-utils
+samtoolsVersion,SAMtools/1.2-goolf-1.7.20
+RVersion,R/3.2.1-goolf-1.7.20
+picardVersion,picard/1.130-Java-1.7.0_80
+dropseqVersion,Drop-seq_tools/1.12-Java-1.7.0_80
+anacondaVersion,Anaconda/1.8.0-Linux-x86_64
+hisatVersion,hisat/0.1.5-beta-goolf-1.7.20
+pythonVersion,Python/2.7.9-goolf-1.7.20
+ghostscriptVersion,Ghostscript/9.16-goolf-1.7.20
+picardJar,picard.jar
+mergeSamFilesJar,MergeSamFiles
+genome,b37
+GR,GRCh37
+ensembleReleaseVersion,75
+
+##### GENERAL DIRECTORIES #####
+tmpDataDir,${workDir}/${tmpName}/
+tmpTmpDataDir,${tmpDataDir}/tmp/
+sourcesDir,${root}/sources/
+softwareDir,${root}/software/
+scriptDir,${softwareDir}/scripts/
+
+##### RAW DATA FILES/DIRS #####
+allRawNgsPrmDataDir,${permanentDir}/rawdata/ngs
+allRawtmpDataDir,${tmpDataDir}/rawdata/
+allRawNgstmpDataDir,${allRawtmpDataDir}/ngs/
+rawtmpDataDir,${allRawNgstmpDataDir}/${runPrefix}
+
+srInputFile,${rawtmpDataDir}/${filePrefix}.fq.gz
+peEnd1FqGz,${rawtmpDataDir}/${filePrefix}_1.fq.gz
+peEnd2FqGz,${rawtmpDataDir}/${filePrefix}_2.fq.gz
+peEnd1BarcodeFqGz,${rawFile}_1.${rawFileExt}
+peEnd2BarcodeFqGz,${rawFile}_2.${rawFileExt}
+peEnd1BarcodeFq,${rawFile}_1.fq
+srBarcodeFqGz,${rawFile}.${rawFileExt}
+srBarcodeFq,${intermediateDir}/${filePrefix}_${barcode}.fq
+leftbarcode,${projectRawtmpDataDir}/${filePrefix}_${barcode}_1
+rightbarcode,${projectRawtmpDataDir}/${filePrefix}_${barcode}_2
+leftbarcodefq,${leftbarcode}.fq
+rightbarcodefq,${rightbarcode}.fq
+leftbarcodefqgz,${leftbarcodefq}.gz
+rightbarcodefqgz,${rightbarcodefq}.gz
+workflowFile,$MC_HOME/NGS_ScRNA/workflow.csv
+
+##### GENOME,INDEX,ANNOTATION FILES #####
+ensembleDir,${dataDir}/ftp.ensembl.org/pub/release-${ensembleReleaseVersion}/gtf/${species}/
+geneAnnotationTxt,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.annotation.geneIds.txt.gz
+annotationGtf,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.gtf
+annotationRefFlat,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.gtf.annotation.refFlat
+annotationIntervalList,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.rrna.interval_list
+indexFile,${indexSpecies}
+dbsnpVcf,${dbSNPDir}${dbSNPFileID}.vcf
+
+##### PREFIXES,POSTFIXES #####
+rawFileExt,fq.gz
+runPrefix,${sequencingStartDate}_${sequencer}_${run}_${flowcell}
+rawFile,${projectRawtmpDataDir}/${filePrefix}_${barcode}
+filePrefix,${runPrefix}_L${lane}
+library,${filePrefix}
+
+##### Projects #####
+generalProjectDir,${tmpDataDir}/projects/
+projectDir,${generalProjectDir}/${project}/${runid}
+projectRawtmpDataDir,${projectDir}/rawdata/ngs/
+projectRawArraytmpDataDir,${projectDir}/rawdata/array/
+intermediateDir,${tempDir}/${project}/${runid}/
+projectPrefix,${intermediateDir}/${project}
+projectJobsDir,${projectDir}/jobs/
+projectLogsDir,${projectDir}/logs/
+projectResultsDir,${projectDir}/results/
+projectQcDir,${projectDir}/qc/
+
+##### Protocols 0,1a,1b, (Reads flagging, HisatAlignment,MergeBam) #####
+unMappedBam,${intermediateDir}/${filePrefix}.unmapped.bam
+taggedUnmappedBam,${intermediateDir}/${filePrefix}.unmapped.tagged.bam
+unsortedBam,${intermediateDir}/${filePrefix}.unsorted.bam
+taggedUnmappedfilterFQs,${intermediateDir}/${filePrefix}.unsorted.fq
+alignedSam,${intermediateDir}/${filePrefix}.aligned.sam
+alignedSortedBam,${intermediateDir}/${filePrefix}.aligned.sorted.bam
+alignedSortedBai,${intermediateDir}/${filePrefix}.aligned.sorted.bai
+sampleMergedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.merged.bam
+sampleMergedExonTaggedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.merged.exonTagged.bam

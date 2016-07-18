@@ -1,0 +1,9 @@
+step,protocol,dependencies
+s00_FastqToSam,protocols/FastqToSam.sh,
+s01_TagUmappedBam,protocols/TagUmappedBam.sh,s00_FastqToSam
+s02_BamToFastq,protocols/BamToFastq.sh,s01_TagUmappedBam
+s03_HisatAlignment,protocols/HisatAlignment.sh,s02_BamToFastq
+s04_MergeBam,protocols/MergeBam.sh,s03_HisatAlignment
+s05_TagMergedBamWithGeneExon,protocols/TagMergedBamWithGeneExon.sh,s04_MergeBam
+s06_DigitalExpression,protocols/DigitalExpression.sh,s05_TagMergedBamWithGeneExon
+#s09_CopyToResultsDir,protocols/CopyToResultsDir.sh,s07_MakeExpressionTable;s01_FastQC;s05_QCStats
