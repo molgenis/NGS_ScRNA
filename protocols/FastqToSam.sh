@@ -11,6 +11,7 @@
 #string picardVersion
 #string groupname
 #string tmpName
+#string tempDir
 
 
 #Load module
@@ -25,6 +26,7 @@ tmpunMappedBam=${MC_tmpFile}
 	FASTQ2=${peEnd2BarcodeFqGz} \
 	OUTPUT=${tmpunMappedBam} \
 	SAMPLE_NAME=${externalSampleID} \
+	TMP_DIR=${tempDir} \
 	PLATFORM=illumina
 
 echo -e "\nFastqToSam finished succesfull. Moving temp files to final.\n\n"

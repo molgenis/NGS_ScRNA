@@ -3,27 +3,11 @@
 #Parameter mapping
 
 #string projectResultsDir
+#string projectJobsDir
 #string project
 #string intermediateDir
-#string projectLogsDir
-#string projectQcDir
-#string projectJobsDir
-#string projectHTseqExpressionTable
 #string annotationGtf
-#string anacondaVersion
-#string indexFileID
 #string seqType
-#string jdkVersion
-#string fastqcVersion
-#string samtoolsVersion
-#string RVersion
-#string wkhtmltopdfVersion
-#string picardVersion
-#string hisatVersion
-#string htseqVersion
-#string pythonVersion
-#string gatkVersion
-#string ghostscriptVersion
 #string ensembleReleaseVersion
 #string groupname
 #string tmpName
@@ -34,97 +18,30 @@ umask 0007
 
 # Make result directories
 mkdir -p ${projectResultsDir}/alignment
-mkdir -p ${projectResultsDir}/fastqc
 mkdir -p ${projectResultsDir}/expression
-mkdir -p ${projectResultsDir}/expression/perSampleExpression
-mkdir -p ${projectResultsDir}/expression/expressionTable
-mkdir -p ${projectResultsDir}/images
-mkdir -p ${projectResultsDir}/variants
-mkdir -p ${projectResultsDir}/qcmetrics
-
-# Copy error, out and finished logs to project jobs directory
-
-cp ${projectJobsDir}/*.out ${projectLogsDir}
-cp ${projectJobsDir}/*.err ${projectLogsDir}
-cp ${projectJobsDir}/*.log ${projectLogsDir}
+mkdir -p ${projectResultsDir}/qc
 
 # Copy project csv file to project results directory
 
 cp ${projectJobsDir}/${project}.csv ${projectResultsDir}
 
-# Copy fastQC output to results directory
-
-	cp ${intermediateDir}/*_fastqc.zip ${projectResultsDir}/fastqc
-
-# Copy BAM plus index plus md5 sum to results directory
-
-usedWorkflow=$(basename ${workflow})
-
-if [ "${usedWorkflow}" == "workflow_lexogen.csv" ]
-then
-	cp ${intermediateDir}/*.unique_mapping_reads.sorted.merged.dedup.bam ${projectResultsDir}/alignment
-        cp ${intermediateDir}/*.unique_mapping_reads.sorted.merged.dedup.bam.md5 ${projectResultsDir}/alignment
-        cp ${intermediateDir}/*.unique_mapping_reads.sorted.merged.dedup.bai ${projectResultsDir}/alignment
-        cp ${intermediateDir}/*.unique_mapping_reads.sorted.merged.dedup.bai.md5 ${projectResultsDir}/alignment
-else
-	cp ${intermediateDir}/*.sorted.merged.dedup.splitAndTrim.bam ${projectResultsDir}/alignment
-        cp ${intermediateDir}/*.sorted.merged.dedup.splitAndTrim.bam.md5 ${projectResultsDir}/alignment
-        cp ${intermediateDir}/*.sorted.merged.dedup.splitAndTrim.bai ${projectResultsDir}/alignment
-        cp ${intermediateDir}/*.sorted.merged.dedup.splitAndTrim.bai.md5 ${projectResultsDir}/alignment
-fi
-
-# copy qc metrics to qcmetrics folder
-
-	cp ${intermediateDir}/*.hisat.log ${projectResultsDir}/qcmetrics
-	cp ${intermediateDir}/*.quality_by_cycle_metrics ${projectResultsDir}/qcmetrics
-	cp ${intermediateDir}/*.quality_by_cycle.pdf ${projectResultsDir}/qcmetrics
-	cp ${intermediateDir}/*.quality_distribution.pdf ${projectResultsDir}/qcmetrics
-	cp ${intermediateDir}/*.quality_distribution_metrics ${projectResultsDir}/qcmetrics
-	cp ${intermediateDir}/*.base_distribution_by_cycle.pdf ${projectResultsDir}/qcmetrics 
-	cp ${intermediateDir}/*.base_distribution_by_cycle_metrics ${projectResultsDir}/qcmetrics
-	cp ${intermediateDir}/*.alignment_summary_metrics ${projectResultsDir}/qcmetrics
-        cp ${intermediateDir}/*.flagstat ${projectResultsDir}/qcmetrics
-	cp ${intermediateDir}/*.mdupmetrics ${projectResultsDir}/qcmetrics
-	cp ${intermediateDir}/*.collectrnaseqmetrics ${projectResultsDir}/qcmetrics
-
-	if [ "${seqType}" == "PE" ]
-        then
-		cp ${intermediateDir}/*.insert_size_metrics ${projectResultsDir}/qcmetrics
-	else
-		echo "Skip insertSizeMetrics. seqType is: ${seqType}"
-	fi
+	cp ${intermediateDir}/*.merged.exonTagged.bam ${projectResultsDir}/alignment
 
 # copy GeneCounts to results directory
 
-	cp ${intermediateDir}/*.htseq.txt ${projectResultsDir}/expression/perSampleExpression
-	cp ${projectHTseqExpressionTable} ${projectResultsDir}/expression/expressionTable
+	cp ${intermediateDir}/*UMIs_counts_per_gene_exon.txt ${projectResultsDir}/expression/
+	cp ${intermediateDir}/*total_readcounts_per_gene_exon_tagged.txt ${projectResultsDir}/expression/ 
+	cp ${intermediateDir}/*DigitalExpression_cell_readcounts.txt ${projectResultsDir}/expression/ 
+
 	cp ${annotationGtf} ${projectResultsDir}/expression/
 
 # Copy QC images and report to results directory
 
-	cp ${intermediateDir}/*.collectrnaseqmetrics.png ${projectResultsDir}/images
-	cp ${intermediateDir}/*.GC.png ${projectResultsDir}/images
-	cp ${projectQcDir}/${project}_QCReport.html ${projectResultsDir}
-	cp ${projectQcDir}/${project}_QCReport.pdf ${projectResultsDir}
-
-# Copy variants vcfs to results directory
-
-	usedWorkflow=$(basename ${workflow})
-	if [ "${usedWorkflow}" == "workflow_lexogen.csv" ]
-        then
-		echo "Variant vcfs are not existing, skipped"
-	else
-		cp ${intermediateDir}/${project}.variant.calls.genotyped.*.vcf* ${projectResultsDir}/variants
-	fi
-
-#only available with PE
-	if [ "${seqType}" == "PE" ]
-	then
-		cp ${intermediateDir}/*.insertsizemetrics.png ${projectResultsDir}/images
-		cp ${intermediateDir}/*.insert_size_histogram.pdf ${projectResultsDir}/images
-	else
-                echo "Skip insertSizeMetrics. seqType is: ${seqType}"
-	fi
+	cp ${intermediateDir}/*polyA_trimming_report.txt ${projectResultsDir}/qc
+	cp ${intermediateDir}/*unaligned_tagged_Cellular.bam_summary.txt ${projectResultsDir}/qc
+	cp ${intermediateDir}/*unaligned_tagged_Molecular.bam_summary.txt ${projectResultsDir}/qc
+	cp ${intermediateDir}/*adapter_trimming_report.txt ${projectResultsDir}/qc
+	cp ${intermediateDir}/*hisat.log ${projectResultsDir}/qc
 
 
 # write README.txt file
@@ -135,7 +52,7 @@ Morris A. Swertz
 University of Groningen, University Medical Center Groningen, Genomics Coordination Center, Groningen, the Netherlands
 University of Groningen, University Medical Center Groningen, Department of Genetics, Groningen, the Netherlands
 
-Description of the different steps used in the RNA analysis pipeline
+Description of the different steps used in the ScRNA analysis pipeline
 
 RNA Isolation, Sample Preparation and sequencing
 Initial quality check of and RNA quantification of the samples was performed by capillary 
@@ -156,31 +73,12 @@ The gene level quantification was performed by HTSeq-count ${htseqVersion} [3] u
 Ensembl version ${ensembleReleaseVersion} was used as gene annotation database which is included
 in folder expression/. 
 
-Calculate QC metrics on raw and aligned data
-Quality control (QC) metrics are calculated for the raw sequencing data. This is done using 
-the tool FastQC ${fastqcVersion} [4]. QC metrics are calculated for the aligned reads using 
-Picard-tools ${picardVersion} [5] CollectRnaSeqMetrics, MarkDuplicates, CollectInsertSize-
-Metrics and ${samtoolsVersion} flagstat.
-
-GATK variant calling
-Variant calling was done using GATK. First, we use a GATK tool called SplitNCigarReads
-developed specially for RNAseq, which splits reads into exon segments (getting rid of Ns
-but maintaining grouping information) and hard-clip any sequences overhanging into the intronic regions.
-The variant calling it self was done using HaplotypeCaller in GVCF mode. All  samples are 
-then jointly genotyped by taking the gVCFs produced earlier and running GenotypeGVCFs 
-on all of them together to create a set of raw SNP and indel calls per chomosome. [6]
-
-
-
 Results archive
 The zipped archive contains the following data and subfolders:
 
 - alignment: merged BAM file with index, md5sums and alignment statistics (.Log.final.out)
 - expression: textfiles with gene level quantification per sample and per project. 
-- fastqc: FastQC output
 - images: QC images
-- qcmetrics: Multiple qcMetrics generated with Picard-tools or SAMTools Flagstat.
-- variants: Variants calls using GATK. (optional)
 - rawdata: raw sequence file in the form of a gzipped fastq file (.fq.gz)
 
 The root of the results directory contains the final QC report, README.txt and the samplesheet which 
@@ -189,14 +87,7 @@ form the basis for this analysis.
 Used toolversions:
 
 ${jdkVersion}
-${fastqcVersion}
-${samtoolsVersion}
-${RVersion}
-${wkhtmltopdfVersion}
 ${picardVersion}
-${htseqVersion}
-${pythonVersion}
-${gatkVersion}
 ${ghostscriptVersion}
 ${hisatVersion}
 
@@ -219,20 +110,15 @@ endmsg
 
 cd ${projectResultsDir}
 
-zip -gr ${projectResultsDir}/${project}.zip fastqc
 zip -g ${projectResultsDir}/${project}.zip ${project}.csv
-zip -gr ${projectResultsDir}/${project}.zip qcmetrics
 zip -gr ${projectResultsDir}/${project}.zip expression
-zip -gr ${projectResultsDir}/${project}.zip variants
-zip -gr ${projectResultsDir}/${project}.zip images
-zip -g ${projectResultsDir}/${project}.zip ${project}_QCReport.pdf
+zip -gr ${projectResultsDir}/${project}.zip qc
 zip -g ${projectResultsDir}/${project}.zip README.txt
 
 # Create md5sum for zip file
 
 cd ${projectResultsDir}
 md5sum ${project}.zip > ${projectResultsDir}/${project}.zip.md5
-cd ${projectJobsDir}
 
 # add u+rwx,g+r+w rights for GAF group
 

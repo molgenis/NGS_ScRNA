@@ -78,12 +78,17 @@ projectResultsDir,${projectDir}/results/
 projectQcDir,${projectDir}/qc/
 
 ##### Protocols 0,1a,1b, (Reads flagging, HisatAlignment,MergeBam) #####
-unMappedBam,${intermediateDir}/${filePrefix}.unmapped.bam
-taggedUnmappedBam,${intermediateDir}/${filePrefix}.unmapped.tagged.bam
-unsortedBam,${intermediateDir}/${filePrefix}.unsorted.bam
-taggedUnmappedfilterFQs,${intermediateDir}/${filePrefix}.unsorted.fq
-alignedSam,${intermediateDir}/${filePrefix}.aligned.sam
-alignedSortedBam,${intermediateDir}/${filePrefix}.aligned.sorted.bam
-alignedSortedBai,${intermediateDir}/${filePrefix}.aligned.sorted.bai
+unMappedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.unmapped.bam
+taggedUnmappedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.unmapped.tagged.bam
+unsortedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.unsorted.bam
+taggedUnmappedfilterFQs,${intermediateDir}/${filePrefix}_${externalSampleID}.unsorted.fq
+alignedSam,${intermediateDir}/${filePrefix}_${externalSampleID}.aligned.sam
+alignedSortedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.aligned.sorted.bam
+alignedSortedBai,${intermediateDir}/${filePrefix}_${externalSampleID}.aligned.sorted.bai
 sampleMergedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.merged.bam
-sampleMergedExonTaggedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.merged.exonTagged.bam
+sampleLanesMergedBam,${intermediateDir}/${externalSampleID}.${run}.merged.bam
+sampleMergedExonTaggedBam,${intermediateDir}/${externalSampleID}.${run}.merged.exonTagged.bam
+celbarcodesPresent,${intermediateDir}/${externalSampleID}.${run}.cellbarcodes.txt
+UmiCountsPerGeneExon,${intermediateDir}/${externalSampleID}.${run}.UMIs_counts_per_gene_exon.txt
+TotalCountsPerGeneExon,${intermediateDir}/${externalSampleID}.${run}.total_readcounts_per_gene_exon_tagged.txt
+CellReadcounts,${intermediateDir}/${externalSampleID}.${run}.DigitalExpression_cell_readcounts.txt

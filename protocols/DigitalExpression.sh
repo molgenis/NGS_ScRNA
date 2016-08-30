@@ -10,6 +10,24 @@
 #string tmpTmpDataDir
 #string groupname
 #string tmpName
+#string celbarcodesPresent
+#string UmiCountsPerGeneExon
+#string TotalCountsPerGeneExon
+#string CellReadcounts
+#list barcode2
+
+array_contains () {
+    local array="$1[@]"
+    local seeking=$2
+    local in=1
+    for element in "${!array-}"; do
+        if [[ "$element" == "$seeking" ]]; then
+            in=0
+            break
+        fi
+    done
+    return $in
+}
 
 #Load module
 module load ${dropseqVersion}
@@ -18,7 +36,18 @@ module list
 makeTmpDir ${sampleMergedExonTaggedBam}
 tmpsampleMergedExonTaggedBam=${MC_tmpFile}
 
-celbarcodes_present="/groups/umcg-gaf/tmp04/projects/NGS_ScRNA_test/run01/jobs/barcodes.txt"
+
+for barcode in "${barcode2[@]}"
+do
+	array_contains INPUTS "$barcode" || INPUTS+=("$barcode")    # If bamFile does not exist in array add it
+done
+
+
+for cellBarcode in "${INPUTS[@]}" 
+do
+        echo -e "${cellBarcode}" >> ${celbarcodesPresent}
+done
+
 
 # Number of uniq UMI's per gene and cellbarcode 
 
@@ -30,10 +59,11 @@ GENE_EXON_TAG=GE \
 OUTPUT_READS_INSTEAD=false \
 MIN_SUM_EXPRESSION=0 \
 MIN_BC_READ_THRESHOLD=0 \
-CELL_BC_FILE=${celbarcodes_present} \
+CELL_BC_FILE=${celbarcodesPresent} \
 SUMMARY=${intermediateDir}/${externalSampleID}_DigitalExpression_cell_gene_number.txt \
 INPUT=${sampleMergedExonTaggedBam} \
-OUTPUT=${intermediateDir}/${externalSampleID}_UMIs_counts_per_gene_exon.txt
+OUTPUT=${UmiCountsPerGeneExon}
+${intermediateDir}/${externalSampleID}_UMIs_counts_per_gene_exon.txt
 
 
 #Digital Gene Expression (Total reads)
@@ -46,14 +76,17 @@ MOLECULAR_BARCODE_TAG=XM \
 GENE_EXON_TAG=GE \
 MIN_SUM_EXPRESSION=0 \
 MIN_BC_READ_THRESHOLD=0 \
-CELL_BC_FILE=${celbarcodes_present} \
+CELL_BC_FILE=${celbarcodesPresent} \
 INPUT=${sampleMergedExonTaggedBam} \
-OUTPUT=${intermediateDir}/${externalSampleID}_total_readcounts_per_gene_exon_tagged.txt
+OUTPUT=${TotalCountsPerGeneExon}
+${intermediateDir}/${externalSampleID}_total_readcounts_per_gene_exon_tagged.txt
 
 #Cell Selection
 java -Xmx4g -XX:ParallelGCThreads=8 -Djava.io.tmpdir=${tmpTmpDataDir} -jar ${EBROOTDROPMINSEQ_TOOLS}/jar/dropseq.jar BAMTagHistogram \
 TAG=XC \
 INPUT=${sampleMergedExonTaggedBam} \
-OUTPUT=${intermediateDir}/${externalSampleID}_DigitalExpression_cell_readcounts.txt
+OUTPUT=${CellReadcounts}
+
+${intermediateDir}/${externalSampleID}_DigitalExpression_cell_readcounts.txt
 
 echo -e "\ns Dropseq TagReadWithGeneExon finished succesfull. Moving temp files to final.\n\n"
