@@ -63,7 +63,6 @@ CELL_BC_FILE=${celbarcodesPresent} \
 SUMMARY=${intermediateDir}/${externalSampleID}_DigitalExpression_cell_gene_number.txt \
 INPUT=${sampleMergedExonTaggedBam} \
 OUTPUT=${UmiCountsPerGeneExon}
-${intermediateDir}/${externalSampleID}_UMIs_counts_per_gene_exon.txt
 
 
 #Digital Gene Expression (Total reads)
@@ -79,14 +78,11 @@ MIN_BC_READ_THRESHOLD=0 \
 CELL_BC_FILE=${celbarcodesPresent} \
 INPUT=${sampleMergedExonTaggedBam} \
 OUTPUT=${TotalCountsPerGeneExon}
-${intermediateDir}/${externalSampleID}_total_readcounts_per_gene_exon_tagged.txt
 
 #Cell Selection
 java -Xmx4g -XX:ParallelGCThreads=8 -Djava.io.tmpdir=${tmpTmpDataDir} -jar ${EBROOTDROPMINSEQ_TOOLS}/jar/dropseq.jar BAMTagHistogram \
 TAG=XC \
 INPUT=${sampleMergedExonTaggedBam} \
 OUTPUT=${CellReadcounts}
-
-${intermediateDir}/${externalSampleID}_DigitalExpression_cell_readcounts.txt
 
 echo -e "\ns Dropseq TagReadWithGeneExon finished succesfull. Moving temp files to final.\n\n"

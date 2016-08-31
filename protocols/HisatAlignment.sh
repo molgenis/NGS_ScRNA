@@ -1,4 +1,4 @@
-#MOLGENIS nodes=1 ppn=8 mem=8gb walltime=05:00:00
+#MOLGENIS nodes=1 ppn=8 mem=12gb walltime=05:00:00
 
 #string project
 #string stage
