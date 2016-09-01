@@ -5,7 +5,7 @@
 #string intermediateDir
 #string externalSampleID
 #string project
-#string sampleMergedBam
+#string sampleLanesMergedBam
 #string sampleMergedExonTaggedBam
 #string externalSampleID
 #string dropseqVersion
@@ -25,7 +25,7 @@ java -XX:ParallelGCThreads=4 -jar -Xmx3g ${EBROOTDROPMINSEQ_TOOLS}/jar/dropseq.j
 ANNOTATIONS_FILE=${annotationRefFlat} \
 TAG=GE \
 CREATE_INDEX=true \
-INPUT=${sampleMergedBam} \
+INPUT=${sampleLanesMergedBam} \
 OUTPUT=${tmpsampleMergedExonTaggedBam}
 
 echo -e "\ns Dropseq TagReadWithGeneExon finished succesfull. Moving temp files to final.\n\n"

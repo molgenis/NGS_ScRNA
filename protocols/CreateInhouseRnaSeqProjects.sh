@@ -40,6 +40,9 @@ umask 0007
 
 #FIX!
 module load Molgenis-Compute/v16.05.1-Java-1.8.0_45
+
+EBROOTNGS_SCRNA="/home/umcg-gvdvries/github/NGS_ScRNA"
+
 #module load ${ngsversion}
 
 module load ${NGSUtilsVersion}
@@ -134,9 +137,9 @@ sh ${EBROOTMOLGENISMINCOMPUTE}/molgenis_compute.sh \
 -p ${mainParameters} \
 -p ${parameters_species} \
 -p ${parameters_environment} \
---header ${EBROOTMOLGENISMINCOMPUTE}/templates/slurm/header_gaf.ftl \
---footer ${EBROOTMOLGENISMINCOMPUTE}/templates/slurm/footer_gaf.ftl \
---submit ${EBROOTMOLGENISMINCOMPUTE}/templates/slurm/submit_gaf.ftl \
+--header ${EBROOTNGS_SCRNA}/templates/slurm/header.ftl \
+--footer ${EBROOTNGS_SCRNA}/templates/slurm/footer.ftl \
+--submit ${EBROOTNGS_SCRNA}/templates/slurm/submit.ftl \
 -p ${projectJobsDir}/${project}.csv -rundir ${projectJobsDir} \
 -w ${workflowpath} -b slurm -g -weave -runid ${runid} \
 -o "ngsversion=${ngsversion};groupname=${groupname};"
