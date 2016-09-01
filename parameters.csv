@@ -88,7 +88,7 @@ alignedSortedBai,${intermediateDir}/${filePrefix}_${externalSampleID}.aligned.so
 sampleMergedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.merged.bam
 sampleLanesMergedBam,${intermediateDir}/${externalSampleID}.${run}.merged.bam
 sampleMergedExonTaggedBam,${intermediateDir}/${externalSampleID}.${run}.merged.exonTagged.bam
-celbarcodesPresent,${intermediateDir}/${externalSampleID}.${run}.cellbarcodes.txt
+cellbarcodesPresent,${intermediateDir}/${externalSampleID}.${run}.cellbarcodes.txt
 UmiCountsPerGeneExon,${intermediateDir}/${externalSampleID}.${run}.UMIs_counts_per_gene_exon.txt
 TotalCountsPerGeneExon,${intermediateDir}/${externalSampleID}.${run}.total_readcounts_per_gene_exon_tagged.txt
 CellReadcounts,${intermediateDir}/${externalSampleID}.${run}.DigitalExpression_cell_readcounts.txt

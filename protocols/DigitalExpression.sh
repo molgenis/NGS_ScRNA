@@ -10,7 +10,7 @@
 #string tmpTmpDataDir
 #string groupname
 #string tmpName
-#string celbarcodesPresent
+#string cellbarcodesPresent
 #string UmiCountsPerGeneExon
 #string TotalCountsPerGeneExon
 #string CellReadcounts
@@ -45,7 +45,7 @@ done
 
 for cellBarcode in "${INPUTS[@]}" 
 do
-        echo -e "${cellBarcode}" >> ${celbarcodesPresent}
+        echo -e "${cellBarcode}" >> ${cellbarcodesPresent}
 done
 
 
@@ -59,7 +59,7 @@ GENE_EXON_TAG=GE \
 OUTPUT_READS_INSTEAD=false \
 MIN_SUM_EXPRESSION=0 \
 MIN_BC_READ_THRESHOLD=0 \
-CELL_BC_FILE=${celbarcodesPresent} \
+CELL_BC_FILE=${cellbarcodesPresent} \
 SUMMARY=${intermediateDir}/${externalSampleID}_DigitalExpression_cell_gene_number.txt \
 INPUT=${sampleMergedExonTaggedBam} \
 OUTPUT=${UmiCountsPerGeneExon}
@@ -75,7 +75,7 @@ MOLECULAR_BARCODE_TAG=XM \
 GENE_EXON_TAG=GE \
 MIN_SUM_EXPRESSION=0 \
 MIN_BC_READ_THRESHOLD=0 \
-CELL_BC_FILE=${celbarcodesPresent} \
+CELL_BC_FILE=${cellbarcodesPresent} \
 INPUT=${sampleMergedExonTaggedBam} \
 OUTPUT=${TotalCountsPerGeneExon}
 

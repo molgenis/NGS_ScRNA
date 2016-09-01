@@ -1,12 +1,7 @@
 #!/bin/bash
 
-#module load NGS_ScRNA/1.0.0-Molgenis-Compute-v16.05.1-Java-1.8.0_45
-module load Molgenis-Compute/v16.05.1-Java-1.8.0_45
-#module list
-
-HOST=$(hostname)
-##Running script for checking the environment variables
-EBROOTNGS_ScRNA="/home/umcg-gvdvries/github/NGS_ScRNA"
+module load NGS_ScRNA
+module list
 
 
 HOST=$(hostname)
@@ -23,7 +18,7 @@ RUNID="run01"
 
 WORKDIR="/groups/${GROUP}/${TMPDIR}"
 BUILD="b37" # b37, b38
-SPECIES="homo_sapiens" # callithrix_jacchus, mus_musculus, homo_sapiens
+SPECIES="homo_sapiens"
 
 WORKFLOW=${EBROOTNGS_ScRNA}/workflow.csv
 
