@@ -38,13 +38,6 @@
 #
 umask 0007
 
-#FIX!
-module load Molgenis-Compute/v16.05.1-Java-1.8.0_45
-
-EBROOTNGS_SCRNA="/home/umcg-gvdvries/github/NGS_ScRNA"
-
-#module load ${ngsversion}
-
 module load ${NGSUtilsVersion}
 module list
 
