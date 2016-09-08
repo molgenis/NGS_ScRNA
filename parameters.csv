@@ -18,7 +18,6 @@ picardJar,picard.jar
 mergeSamFilesJar,MergeSamFiles
 genome,b37
 GR,GRCh37
-ensembleReleaseVersion,75
 
 ##### GENERAL DIRECTORIES #####
 tmpDataDir,${workDir}/${tmpName}/
@@ -56,7 +55,6 @@ annotationGtf,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.gtf
 annotationRefFlat,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.gtf.annotation.refFlat
 annotationIntervalList,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.rrna.interval_list
 indexFile,${indexSpecies}
-dbsnpVcf,${dbSNPDir}${dbSNPFileID}.vcf
 
 ##### PREFIXES,POSTFIXES #####
 rawFileExt,fq.gz

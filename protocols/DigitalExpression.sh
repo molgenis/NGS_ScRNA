@@ -37,6 +37,8 @@ makeTmpDir ${sampleMergedExonTaggedBam}
 tmpsampleMergedExonTaggedBam=${MC_tmpFile}
 
 
+rm -f ${cellbarcodesPresent}
+
 for barcode in "${barcode2[@]}"
 do
 	array_contains INPUTS "$barcode" || INPUTS+=("$barcode")    # If bamFile does not exist in array add it
