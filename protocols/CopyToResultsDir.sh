@@ -12,6 +12,8 @@
 #string dropseqVersion
 #string picardVersion
 #string hisatVersion
+#string indexFileID
+#string ensembleReleaseVersion
 
 #string groupname
 #string tmpName
@@ -123,4 +125,4 @@ md5sum ${project}.zip > ${projectResultsDir}/${project}.zip.md5
 chmod -R u+rwX,g+rwX ${projectResultsDir}
 chmod -R g+rwX ${intermediateDir}
 
-cd ${projectJobsDirx}
+cd ${projectJobsDir}

@@ -46,7 +46,7 @@ echo "## "$(date)" Start $0"
 	hisat -x ${hisatIndex} \
 	-U ${taggedUnmappedfilterFQs} \
 	-p 8 \
-	-S ${tmpalignedSam} > ${intermediateDir}/${filePrefix}.hisat.log 2>&1
+	-S ${tmpalignedSam} > ${intermediateDir}/${filePrefix}_${externalSampleID}.hisat.log 2>&1
 
 
 java -XX:ParallelGCThreads=4 -jar -Xmx6g ${EBROOTPICARD}/${picardJar} SortSam \

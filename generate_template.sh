@@ -57,4 +57,4 @@ mainParameters=${WORKDIR}/generatedscripts/${PROJECT}/parameters.csv;\
 worksheet=${WORKDIR}/generatedscripts/${PROJECT}/${PROJECT}.csv;\
 parameters_species=${WORKDIR}/generatedscripts/${PROJECT}/parameters.${SPECIES}.csv;\
 parameters_environment=${WORKDIR}/generatedscripts/${PROJECT}/parameters.${ENVIRONMENT}.csv;\
-ngsversion='1.0.1';"
+ngsversion='NGS_ScRNA/1.0.1-Molgenis-Compute-v16.08.1-Java-1.8.0_74';"
