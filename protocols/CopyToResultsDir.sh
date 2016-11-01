@@ -74,7 +74,7 @@ End 2 x 100 bp) in pools of multiple samples.
 Gene expression quantification
 The trimmed fastQ files where aligned to build ${indexFileID} ensembleRelease ${ensembleReleaseVersion} 
 reference genome using ${hisatVersion} [1] with default settings. Before gene quantification 
-${PicardVersion} [2] was used to sort the aligned reads. Dropseq ${dropseqVersion} [3] was used for flaging individual cells
+${picardVersion} [2] was used to sort the aligned reads. Dropseq ${dropseqVersion} [3] was used for flaging individual cells
 and UMI's. The gene level quantification was performed again by using Dropseq filtering readcount on unique UMI's.
 Ensembl version ${ensembleReleaseVersion} was used as gene annotation database which is included
 in folder expression/. 
