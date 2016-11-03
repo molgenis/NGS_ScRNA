@@ -37,6 +37,8 @@ makeTmpDir ${sampleMergedExonTaggedBam}
 tmpsampleMergedExonTaggedBam=${MC_tmpFile}
 
 
+rm -f ${cellbarcodesPresent}
+
 for barcode in "${barcode2[@]}"
 do
 	array_contains INPUTS "$barcode" || INPUTS+=("$barcode")    # If bamFile does not exist in array add it
@@ -52,15 +54,15 @@ done
 # Number of uniq UMI's per gene and cellbarcode 
 
 java -Xmx4g -XX:ParallelGCThreads=8 -Djava.io.tmpdir=${tmpTmpDataDir} -jar ${EBROOTDROPMINSEQ_TOOLS}/jar/dropseq.jar DigitalExpression \
-EDIT_DISTANCE=2 \
+EDIT_DISTANCE=1 \
 CELL_BARCODE_TAG=XC \
 MOLECULAR_BARCODE_TAG=XM \
 GENE_EXON_TAG=GE \
 OUTPUT_READS_INSTEAD=false \
 MIN_SUM_EXPRESSION=0 \
 MIN_BC_READ_THRESHOLD=0 \
-CELL_BC_FILE=${cellbarcodesPresent} \
-SUMMARY=${intermediateDir}/${externalSampleID}_DigitalExpression_cell_gene_number.txt \
+CELL_BC_FILE=${cellBarcode[0]} \
+SUMMARY=${intermediateDir}/${externalSampleID}_DigitalExpression_cell_gene_number.umis.txt \
 INPUT=${sampleMergedExonTaggedBam} \
 OUTPUT=${UmiCountsPerGeneExon}
 
@@ -69,13 +71,14 @@ OUTPUT=${UmiCountsPerGeneExon}
 
 java -Xmx4g -XX:ParallelGCThreads=8 -Djava.io.tmpdir=${tmpTmpDataDir} -jar ${EBROOTDROPMINSEQ_TOOLS}/jar/dropseq.jar DigitalExpression \
 OUTPUT_READS_INSTEAD=true \
-EDIT_DISTANCE=2 \
+EDIT_DISTANCE=1 \
 CELL_BARCODE_TAG=XC \
 MOLECULAR_BARCODE_TAG=XM \
 GENE_EXON_TAG=GE \
 MIN_SUM_EXPRESSION=0 \
 MIN_BC_READ_THRESHOLD=0 \
-CELL_BC_FILE=${cellbarcodesPresent} \
+CELL_BC_FILE=${cellBarcode[0]} \
+SUMMARY=${intermediateDir}/${externalSampleID}_DigitalExpression_cell_gene_number.total.txt \
 INPUT=${sampleMergedExonTaggedBam} \
 OUTPUT=${TotalCountsPerGeneExon}
 

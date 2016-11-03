@@ -9,6 +9,12 @@
 #string annotationGtf
 #string seqType
 #string ensembleReleaseVersion
+#string dropseqVersion
+#string picardVersion
+#string hisatVersion
+#string indexFileID
+#string ensembleReleaseVersion
+
 #string groupname
 #string tmpName
 
@@ -68,8 +74,8 @@ End 2 x 100 bp) in pools of multiple samples.
 Gene expression quantification
 The trimmed fastQ files where aligned to build ${indexFileID} ensembleRelease ${ensembleReleaseVersion} 
 reference genome using ${hisatVersion} [1] with default settings. Before gene quantification 
-${samtoolsVersion} [2] was used to sort the aligned reads. 
-The gene level quantification was performed by HTSeq-count ${htseqVersion} [3] using --mode=union, 
+${picardVersion} [2] was used to sort the aligned reads. Dropseq ${dropseqVersion} [3] was used for flaging individual cells
+and UMI's. The gene level quantification was performed again by using Dropseq filtering readcount on unique UMI's.
 Ensembl version ${ensembleReleaseVersion} was used as gene annotation database which is included
 in folder expression/. 
 
@@ -86,23 +92,17 @@ form the basis for this analysis.
 
 Used toolversions:
 
-${jdkVersion}
 ${picardVersion}
-${ghostscriptVersion}
 ${hisatVersion}
+${dropseqVersion}
 
 1. Daehwan Kim, Ben Langmead & Steven L Salzberg: HISAT: a fast spliced aligner with low
-memory requirements. Nature Methods 12, 357–360 (2015)
-2. Li H, Handsaker B, Wysoker A, Fennell T, Ruan J, Homer N, Marth G, Abecasis G, Durbin R,
-Subgroup 1000 Genome Project Data Processing: The Sequence Alignment/Map format and SAMtools.
-Bioinforma 2009, 25 (16):2078–2079.
-3. Anders S, Pyl PT, Huber W: HTSeq – A Python framework to work with high-throughput sequencing data
-HTSeq – A Python framework to work with high-throughput sequencing data. 2014:0–5.
-4. Andrews, S. (2010). FastQC a Quality Control Tool for High Throughput Sequence Data [Online]. 
-Available online at: http://www.bioinformatics.babraham.ac.uk/projects/fastqc/ ${samtoolsVersion}
-5. Picard Sourceforge Web site. http://picard.sourceforge.net/ ${picardVersion}
-6. The Genome Analysis Toolkit: a MapReduce framework for analyzing next-generation DNA sequencing data. 
-McKenna A et al.2010 GENOME RESEARCH 20:1297-303, Version: ${gatkVersion}
+   memory requirements. Nature Methods 12, 357–360 (2015)
+2. Picard Sourceforge Web site. http://picard.sourceforge.net/ ${picardVersion}
+3. Highly Parallel Genome-wide Expression Profiling of Individual Cells Using Nanoliter Droplets
+   Macosko EZ at al,Cell, 2015
+4. The Genome Analysis Toolkit: a MapReduce framework for analyzing next-generation DNA sequencing data. 
+   McKenna A et al.2010 GENOME RESEARCH 20:1297-303, Version: ${gatkVersion}
 
 endmsg
 
@@ -124,3 +124,5 @@ md5sum ${project}.zip > ${projectResultsDir}/${project}.zip.md5
 
 chmod -R u+rwX,g+rwX ${projectResultsDir}
 chmod -R g+rwX ${intermediateDir}
+
+cd ${projectJobsDir}

@@ -39,6 +39,7 @@
 umask 0007
 
 module load ${NGSUtilsVersion}
+module load ${ngsversion}
 module list
 
 #

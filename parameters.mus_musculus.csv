@@ -1,0 +1,11 @@
+#### GENOME VARIABLES ####
+species,mus_musculus
+indexFileID,Mus_musculus.GRCm38
+ensembleReleaseVersion,82
+annotationFileName,Mus_musculus.GRCm38
+indexFolderName,mus_musculus
+indicesDir,${dataDir}/ftp.ensembl.org/pub/release-${ensembleReleaseVersion}/fasta/${species}/
+hisatIndex,${dataDir}/ftp.ensembl.org/pub/release-${ensembleReleaseVersion}/fasta/${species}/${indexFileID}
+indexFileFastaIndex,${indexSpecies}.fai
+indexSpecies,${indicesDir}/${indexFileID}.dna.toplevel.fa
+indexFileDictionary,${indexSpecies}.dict

@@ -14,11 +14,11 @@ anacondaVersion,Anaconda/1.8.0-Linux-x86_64
 hisatVersion,hisat/0.1.5-beta-goolf-1.7.20
 pythonVersion,Python/2.7.9-goolf-1.7.20
 ghostscriptVersion,Ghostscript/9.16-goolf-1.7.20
+BBMapVersion,BBMap/35.69-Java-1.7.0_80
 picardJar,picard.jar
 mergeSamFilesJar,MergeSamFiles
 genome,b37
 GR,GRCh37
-ensembleReleaseVersion,75
 
 ##### GENERAL DIRECTORIES #####
 tmpDataDir,${workDir}/${tmpName}/
@@ -56,7 +56,6 @@ annotationGtf,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.gtf
 annotationRefFlat,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.gtf.annotation.refFlat
 annotationIntervalList,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.rrna.interval_list
 indexFile,${indexSpecies}
-dbsnpVcf,${dbSNPDir}${dbSNPFileID}.vcf
 
 ##### PREFIXES,POSTFIXES #####
 rawFileExt,fq.gz
