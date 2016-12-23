@@ -35,5 +35,5 @@ FIND_INDELS=true \
 MIN_NUM_READS_CORE=3000
 
 
-echo -e "\ns Dropseq TagReadWithGeneExon finished succesfull. Moving temp files to final.\n\n"
+echo -e "\ns Dropseq CollapseBarcodesInPlace finished succesfull. Moving temp files to final.\n\n"
 mv -f ${tmpsampleMergedExonTaggedCollapsedBam} ${sampleMergedExonTaggedCollapsedBam}

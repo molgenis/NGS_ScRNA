@@ -30,5 +30,5 @@ COMPRESSION_LEVEL=0 \
 TAG=XE \
 LOCI=${annotationExonIntervalList}
 
-echo -e "\ns Dropseq TagReadWithGeneExon finished succesfull. Moving temp files to final.\n\n"
+echo -e "\ns Dropseq TagReadWithInterval Exons finished succesfull. Moving temp files to final.\n\n"
 #mv -f ${tmpsampleMergedExonTaggedBam} ${sampleMergedExonTaggedBam}
