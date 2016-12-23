@@ -1,4 +1,4 @@
-#MOLGENIS walltime=23:59:00 mem=8gb ppn=1
+#MOLGENIS walltime=23:59:00 mem=10gb ppn=1
 
 #Parameter mapping
 #string stage
@@ -41,12 +41,13 @@ tmpSampleMergedBam=${MC_tmpFile}
 ${stage} ${picardVersion}
 ${checkStage}
 
-	java -XX:ParallelGCThreads=4 -jar -Xmx6g ${EBROOTPICARD}/${picardJar} MergeBamAlignment \
+	java -XX:ParallelGCThreads=4 -jar -Xmx8g ${EBROOTPICARD}/${picardJar} MergeBamAlignment \
 	REFERENCE_SEQUENCE=${indexSpecies} \
 	UNMAPPED_BAM=${taggedUnmappedBam} \
 	ALIGNED_BAM=${alignedSortedBam} \
 	INCLUDE_SECONDARY_ALIGNMENTS=false \
 	PAIRED_RUN=false \
+	COMPRESSION_LEVEL=0 \
 	TMP_DIR=${tempDir} \
 	MAX_RECORDS_IN_RAM=6000000 \
 	VALIDATION_STRINGENCY=LENIENT \

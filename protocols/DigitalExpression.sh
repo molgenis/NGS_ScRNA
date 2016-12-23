@@ -4,7 +4,7 @@
 #string intermediateDir
 #string externalSampleID
 #string project
-#string sampleMergedExonTaggedBam
+#string sampleMergedExonTaggedCollapsedBam
 #string dropseqVersion
 #string annotationRefFlat
 #string tmpTmpDataDir
@@ -33,8 +33,8 @@ array_contains () {
 module load ${dropseqVersion}
 module list
 
-makeTmpDir ${sampleMergedExonTaggedBam}
-tmpsampleMergedExonTaggedBam=${MC_tmpFile}
+makeTmpDir ${sampleMergedExonTaggedCollapsedBam}
+tmpsampleMergedExonTaggedCollapsedBam=${MC_tmpFile}
 
 
 rm -f ${cellbarcodesPresent}
@@ -55,7 +55,7 @@ done
 
 java -Xmx4g -XX:ParallelGCThreads=8 -Djava.io.tmpdir=${tmpTmpDataDir} -jar ${EBROOTDROPMINSEQ_TOOLS}/jar/dropseq.jar DigitalExpression \
 EDIT_DISTANCE=1 \
-CELL_BARCODE_TAG=XC \
+CELL_BARCODE_TAG=ZC \
 MOLECULAR_BARCODE_TAG=XM \
 GENE_EXON_TAG=GE \
 OUTPUT_READS_INSTEAD=false \
@@ -63,7 +63,7 @@ MIN_SUM_EXPRESSION=0 \
 MIN_BC_READ_THRESHOLD=0 \
 CELL_BC_FILE=${cellBarcode[0]} \
 SUMMARY=${intermediateDir}/${externalSampleID}_DigitalExpression_cell_gene_number.umis.txt \
-INPUT=${sampleMergedExonTaggedBam} \
+INPUT=${sampleMergedExonTaggedCollapsedBam} \
 OUTPUT=${UmiCountsPerGeneExon}
 
 
@@ -72,20 +72,20 @@ OUTPUT=${UmiCountsPerGeneExon}
 java -Xmx4g -XX:ParallelGCThreads=8 -Djava.io.tmpdir=${tmpTmpDataDir} -jar ${EBROOTDROPMINSEQ_TOOLS}/jar/dropseq.jar DigitalExpression \
 OUTPUT_READS_INSTEAD=true \
 EDIT_DISTANCE=1 \
-CELL_BARCODE_TAG=XC \
+CELL_BARCODE_TAG=ZC \
 MOLECULAR_BARCODE_TAG=XM \
 GENE_EXON_TAG=GE \
 MIN_SUM_EXPRESSION=0 \
 MIN_BC_READ_THRESHOLD=0 \
 CELL_BC_FILE=${cellBarcode[0]} \
 SUMMARY=${intermediateDir}/${externalSampleID}_DigitalExpression_cell_gene_number.total.txt \
-INPUT=${sampleMergedExonTaggedBam} \
+INPUT=${sampleMergedExonTaggedCollapsedBam} \
 OUTPUT=${TotalCountsPerGeneExon}
 
 #Cell Selection
 java -Xmx4g -XX:ParallelGCThreads=8 -Djava.io.tmpdir=${tmpTmpDataDir} -jar ${EBROOTDROPMINSEQ_TOOLS}/jar/dropseq.jar BAMTagHistogram \
-TAG=XC \
-INPUT=${sampleMergedExonTaggedBam} \
+TAG=ZC \
+INPUT=${sampleMergedExonTaggedCollapsedBam} \
 OUTPUT=${CellReadcounts}
 
 echo -e "\ns Dropseq TagReadWithGeneExon finished succesfull. Moving temp files to final.\n\n"

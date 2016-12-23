@@ -11,9 +11,10 @@
 #string ensembleReleaseVersion
 #string dropseqVersion
 #string picardVersion
-#string hisatVersion
+#string StarVersion
 #string indexFileID
 #string ensembleReleaseVersion
+#string ngsversion
 
 #string groupname
 #string tmpName
@@ -31,7 +32,7 @@ mkdir -p ${projectResultsDir}/qc
 
 cp ${projectJobsDir}/${project}.csv ${projectResultsDir}
 
-	cp ${intermediateDir}/*.merged.exonTagged.bam ${projectResultsDir}/alignment
+	cp ${intermediateDir}/*.merged.gene.exon.Tagged.collapsed.bam ${projectResultsDir}/alignment
 
 # copy GeneCounts to results directory
 
@@ -47,7 +48,8 @@ cp ${projectJobsDir}/${project}.csv ${projectResultsDir}
 	cp ${intermediateDir}/*unaligned_tagged_Cellular.bam_summary.txt ${projectResultsDir}/qc
 	cp ${intermediateDir}/*unaligned_tagged_Molecular.bam_summary.txt ${projectResultsDir}/qc
 	cp ${intermediateDir}/*adapter_trimming_report.txt ${projectResultsDir}/qc
-	cp ${intermediateDir}/*hisat.log ${projectResultsDir}/qc
+	cp ${intermediateDir}/*.final.log ${projectResultsDir}/qc
+	cp ${intermediateDir}/*.final.log ${projectResultsDir}/alignment
 
 
 # write README.txt file
@@ -73,7 +75,7 @@ End 2 x 100 bp) in pools of multiple samples.
 
 Gene expression quantification
 The trimmed fastQ files where aligned to build ${indexFileID} ensembleRelease ${ensembleReleaseVersion} 
-reference genome using ${hisatVersion} [1] with default settings. Before gene quantification 
+reference genome using ${StarVersion} [1] with default settings. Before gene quantification 
 ${picardVersion} [2] was used to sort the aligned reads. Dropseq ${dropseqVersion} [3] was used for flaging individual cells
 and UMI's. The gene level quantification was performed again by using Dropseq filtering readcount on unique UMI's.
 Ensembl version ${ensembleReleaseVersion} was used as gene annotation database which is included
@@ -92,12 +94,12 @@ form the basis for this analysis.
 
 Used toolversions:
 
+${ngsversion}
 ${picardVersion}
-${hisatVersion}
+${StarVersion}
 ${dropseqVersion}
 
-1. Daehwan Kim, Ben Langmead & Steven L Salzberg: HISAT: a fast spliced aligner with low
-   memory requirements. Nature Methods 12, 357–360 (2015)
+1. Dobin A, Davis CA, Gingeras TR: STAR: ultrafast universal RNA-seq aligner. 10.1093 bts635 Bioinformatics (2012)
 2. Picard Sourceforge Web site. http://picard.sourceforge.net/ ${picardVersion}
 3. Highly Parallel Genome-wide Expression Profiling of Individual Cells Using Nanoliter Droplets
    Macosko EZ at al,Cell, 2015
