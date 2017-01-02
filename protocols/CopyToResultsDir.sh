@@ -11,7 +11,7 @@
 #string ensembleReleaseVersion
 #string dropseqVersion
 #string picardVersion
-#string StarVersion
+#string starVersion
 #string indexFileID
 #string ensembleReleaseVersion
 #string ngsversion
@@ -75,7 +75,7 @@ End 2 x 100 bp) in pools of multiple samples.
 
 Gene expression quantification
 The trimmed fastQ files where aligned to build ${indexFileID} ensembleRelease ${ensembleReleaseVersion} 
-reference genome using ${StarVersion} [1] with default settings. Before gene quantification 
+reference genome using ${starVersion} [1] with default settings. Before gene quantification 
 ${picardVersion} [2] was used to sort the aligned reads. Dropseq ${dropseqVersion} [3] was used for flaging individual cells
 and UMI's. The gene level quantification was performed again by using Dropseq filtering readcount on unique UMI's.
 Ensembl version ${ensembleReleaseVersion} was used as gene annotation database which is included
@@ -96,7 +96,7 @@ Used toolversions:
 
 ${ngsversion}
 ${picardVersion}
-${StarVersion}
+${starVersion}
 ${dropseqVersion}
 
 1. Dobin A, Davis CA, Gingeras TR: STAR: ultrafast universal RNA-seq aligner. 10.1093 bts635 Bioinformatics (2012)

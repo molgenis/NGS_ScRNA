@@ -13,7 +13,7 @@ dropseqVersion,Drop-seq_tools/1.12-Java-1.7.0_80
 kallistoVersion,Kallisto/0.43.0-goolf-1.7.20
 anacondaVersion,Anaconda/1.8.0-Linux-x86_64
 hisatVersion,hisat/0.1.5-beta-goolf-1.7.20
-StarVersion,STAR/2.5.1b-foss-2015b
+starVersion,STAR/2.5.1b-foss-2015b
 pythonVersion,Python/2.7.9-goolf-1.7.20
 ghostscriptVersion,Ghostscript/9.16-goolf-1.7.20
 BBMapVersion,BBMap/35.69-Java-1.7.0_80

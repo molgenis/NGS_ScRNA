@@ -30,37 +30,36 @@ mkdir -p ${intermediateDir}/Kallisto/
 
 uniqueID="${project}-${externalSampleID}-L${lane}"
 
-	echo "Kallisto SR for ScRNA"
+echo "Kallisto SR for ScRNA"
 	 	
-	 kallisto pseudo \
-	-i ${kallistoIndex} \
-	--pseudobam \
-        --single \
-        -l 50 -s 10 \
-	-o ${tmpIntermediateDir}/ \
-	${taggedUnmappedfilterFQs} > ${tmpIntermediateDir}/${uniqueID}.sam
+ kallisto pseudo \
+-i ${kallistoIndex} \
+--pseudobam \
+--single \
+-l 50 -s 10 \
+-o ${tmpIntermediateDir}/ \
+${taggedUnmappedfilterFQs} > ${tmpIntermediateDir}/${uniqueID}.sam
 
 
-	java -XX:ParallelGCThreads=4 -jar -Xmx6g ${EBROOTPICARD}/picard.jar SortSam \
-	INPUT=${tmpIntermediateDir}/${uniqueID}.sam \
-	OUTPUT=${tmpIntermediateDir}/${uniqueID}.sorted.bam \
- 	SO=queryname \
-	CREATE_INDEX=true \
-	VALIDATION_STRINGENCY=LENIENT \
-	TMP_DIR=${tempDir}
+java -XX:ParallelGCThreads=4 -jar -Xmx6g ${EBROOTPICARD}/picard.jar SortSam \
+INPUT=${tmpIntermediateDir}/${uniqueID}.sam \
+OUTPUT=${tmpIntermediateDir}/${uniqueID}.sorted.bam \
+SO=queryname \
+CREATE_INDEX=true \
+VALIDATION_STRINGENCY=LENIENT \
+TMP_DIR=${tempDir}
 
 
 
-#	cd ${tmpIntermediateDir}/${uniqueID}
+cd ${tmpIntermediateDir}/${uniqueID}
+md5sum abundance.h5 > abundance.h5.md5
+md5sum run_info.json > run_info.json.md5
+md5sum abundance.tsv > abundance.tsv.md5
+cd -
 
-#	md5sum abundance.h5 > abundance.h5.md5
-#	md5sum run_info.json > run_info.json.md5
-#	md5sum abundance.tsv > abundance.tsv.md5
- #	cd -
-
-#	rm -rf ${intermediateDir}/Kallisto/${uniqueID} 
-	mv -f ${tmpIntermediateDir}/${uniqueID}.sorted.bam  ${alignedSortedBam}
-	echo "succes moving files";
+rm -rf ${intermediateDir}/Kallisto/${uniqueID} 
+mv -f ${tmpIntermediateDir}/${uniqueID}.sorted.bam  ${alignedSortedBam}
+echo "succes moving files";
 
 
 echo "## "$(date)" ##  $0 Done "
