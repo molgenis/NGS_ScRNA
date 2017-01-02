@@ -46,15 +46,15 @@ ${stage} ${picardVersion}
 ${checkStage}
 
 
-	java -XX:ParallelGCThreads=4 -jar -Xmx6g ${EBROOTPICARD}/${picardJar} MergeSamFiles \
-	${INPUTS[@]} \
-	SORT_ORDER=coordinate \
-	CREATE_INDEX=true \
-	USE_THREADING=true \
-	TMP_DIR=${tempDir} \
-	MAX_RECORDS_IN_RAM=6000000 \
-	VALIDATION_STRINGENCY=LENIENT \
-	OUTPUT=${tmpSampleLanesMergedBam}
+java -XX:ParallelGCThreads=4 -jar -Xmx6g ${EBROOTPICARD}/${picardJar} MergeSamFiles \
+${INPUTS[@]} \
+SORT_ORDER=coordinate \
+CREATE_INDEX=true \
+USE_THREADING=true \
+TMP_DIR=${tempDir} \
+MAX_RECORDS_IN_RAM=6000000 \
+VALIDATION_STRINGENCY=LENIENT \
+OUTPUT=${tmpSampleLanesMergedBam}
 
 
-	mv ${tmpSampleLanesMergedBam} ${sampleLanesMergedBam}
+mv ${tmpSampleLanesMergedBam} ${sampleLanesMergedBam}
