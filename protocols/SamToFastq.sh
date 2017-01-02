@@ -21,6 +21,8 @@ module list
  makeTmpDir ${taggedUnmappedfilterFQs}
  tmptaggedUnmappedfilterFQs=${MC_tmpFile}
 
+#clipping atribute XT?
+
  java -Xmx500m -jar ${EBROOTPICARD}/picard.jar SamToFastq \
  INPUT=${taggedUnmappedBam} \
  FASTQ=${taggedfilterFQs}

@@ -9,6 +9,7 @@ indicesDir,${dataDir}/ftp.broadinstitute.org/bundle/2.8/${genome}/
 dbSNPDir,${dataDir}/dbSNP/
 hisatIndex,${dataDir}/ftp.broadinstitute.org/bundle/2.8/${genome}/${hisatVersion}/${indexFolderName}
 kallistoIndex,${dataDir}/ftp.ensembl.org/pub/release-${ensembleReleaseVersion}/fasta/homo_sapiens/Homo_sapiens.GRCh37.${ensembleReleaseVersion}.cdna.all.fa.idx
+StarIndex,${dataDir}/ftp.broadinstitute.org/bundle/2.8/${genome}/${StarVersion}/
 indexFileFastaIndex,${indexSpecies}.fai
 indexSpecies,${indicesDir}/${indexFileID}.fasta
 indexFileDictionary,${indexSpecies}.dict

@@ -99,9 +99,6 @@ done
 
 cd $ROCKETPOINT
 
-echo "before splitting"
-echo pwd
-
 #
 # TODO: array for each sample:
 #
@@ -122,9 +119,6 @@ if [ -f ../.compute.properties ];
 then
      rm ../.compute.properties
 fi
-
-echo "before run second rocket"
-echo pwd
 
 
 sh ${EBROOTMOLGENISMINCOMPUTE}/molgenis_compute.sh \

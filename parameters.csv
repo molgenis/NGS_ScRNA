@@ -8,10 +8,12 @@ jdkVersion,Java/1.7.0_80
 NGSUtilsVersion,ngs-utils
 samtoolsVersion,SAMtools/1.2-goolf-1.7.20
 RVersion,R/3.2.1-goolf-1.7.20
-picardVersion,picard/1.130-Java-1.7.0_80
+picardVersion,picard/2.2.2-foss-2015b-Java-1.8.0_74
 dropseqVersion,Drop-seq_tools/1.12-Java-1.7.0_80
+kallistoVersion,Kallisto/0.43.0-goolf-1.7.20
 anacondaVersion,Anaconda/1.8.0-Linux-x86_64
 hisatVersion,hisat/0.1.5-beta-goolf-1.7.20
+starVersion,STAR/2.5.1b-foss-2015b
 pythonVersion,Python/2.7.9-goolf-1.7.20
 ghostscriptVersion,Ghostscript/9.16-goolf-1.7.20
 BBMapVersion,BBMap/35.69-Java-1.7.0_80
@@ -55,6 +57,8 @@ geneAnnotationTxt,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}
 annotationGtf,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.gtf
 annotationRefFlat,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.gtf.annotation.refFlat
 annotationIntervalList,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.rrna.interval_list
+annotationGenIntervalList,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.gene.interval_list
+annotationExonIntervalList,${ensembleDir}/${annotationFileName}.${ensembleReleaseVersion}.exon.exonId.interval_list
 indexFile,${indexSpecies}
 
 ##### PREFIXES,POSTFIXES #####
@@ -86,7 +90,10 @@ alignedSortedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.aligned.so
 alignedSortedBai,${intermediateDir}/${filePrefix}_${externalSampleID}.aligned.sorted.bai
 sampleMergedBam,${intermediateDir}/${filePrefix}_${externalSampleID}.merged.bam
 sampleLanesMergedBam,${intermediateDir}/${externalSampleID}.${run}.merged.bam
-sampleMergedExonTaggedBam,${intermediateDir}/${externalSampleID}.${run}.merged.exonTagged.bam
+sampleMergedExonTaggedBam,${intermediateDir}/${externalSampleID}.${run}.merged.xeTagged.bam
+sampleMergedExonGenTaggedBam,${intermediateDir}/${externalSampleID}.${run}.merged.xe.xg.Tagged.bam
+sampleMergedFinalTaggedBam,${intermediateDir}/${externalSampleID}.${run}.merged.gene.exon.Tagged.bam
+sampleMergedExonTaggedCollapsedBam,${intermediateDir}/${externalSampleID}.${run}.merged.gene.exon.Tagged.collapsed.bam
 cellbarcodesPresent,${intermediateDir}/${externalSampleID}.${run}.cellbarcodes.txt
 UmiCountsPerGeneExon,${intermediateDir}/${externalSampleID}.${run}.UMIs_counts_per_gene_exon.txt
 TotalCountsPerGeneExon,${intermediateDir}/${externalSampleID}.${run}.total_readcounts_per_gene_exon_tagged.txt
